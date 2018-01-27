@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Jenny on 27.01.2018.
  */
-public class MembersWindow extends JFrame implements ActionListener{
+public class MembersWindow extends JDialog implements ActionListener{
 
     JButton addMember = new JButton("Add Member");
     JButton remMember = new JButton("Remove Member");
@@ -19,6 +19,8 @@ public class MembersWindow extends JFrame implements ActionListener{
 
     public MembersWindow() {
 
+        this.setLocationRelativeTo(null);
+        this.setModal(true);
         this.setSize(500, 500);
         this.setLayout(new GridLayout(0, 1));
 
@@ -47,8 +49,7 @@ public class MembersWindow extends JFrame implements ActionListener{
         add(searchMember);
 
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -61,10 +62,10 @@ public class MembersWindow extends JFrame implements ActionListener{
             System.out.println("Usuwa członka");
         }
         else if(source == back){
-            new MainWindow();
+            this.dispose();
         }
 
-        this.setVisible(false);
+
     }
 
 }

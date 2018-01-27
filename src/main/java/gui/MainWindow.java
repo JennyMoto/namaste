@@ -53,7 +53,7 @@ public class MainWindow extends JFrame implements ActionListener{
             new PaymentWindow();
         }
 
-        this.setVisible(false);
+
     }
 
 }
