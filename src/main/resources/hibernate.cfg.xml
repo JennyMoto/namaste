@@ -17,6 +17,11 @@
 
         <mapping class="models.Persons"/>
         <mapping class="models.Instructors"/>
+        <mapping class="models.Members"/>
+        <mapping class="models.Classes"/>
+        <mapping class="models.ClassesReservations"/>
+        <mapping class="models.ClassesRooms"/>
+        <mapping class="models.ClassesType"/>
 
 
 
