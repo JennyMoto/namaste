@@ -16,6 +16,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <mapping class="models.Persons"/>
+        <mapping class="models.Instructors"/>
 
 
 
