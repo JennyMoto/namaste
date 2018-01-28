@@ -10,7 +10,7 @@ public class Instructors {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "Persons_ID")
     private Persons person;
 
     public int getId() {
