@@ -11,7 +11,7 @@ public class Members {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "Persons_ID")
     private Persons person;
 
     @OneToMany(mappedBy = "members")
