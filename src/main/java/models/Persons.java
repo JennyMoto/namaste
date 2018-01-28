@@ -5,8 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Persons {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
     @Column(name = "Name", nullable = false)
