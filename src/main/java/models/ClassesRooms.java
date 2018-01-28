@@ -9,11 +9,35 @@ public class ClassesRooms {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @Column(name = "RoomName", nullable = true, length = 10)
+    @Column(name = "RoomName")
     private String roomName;
 
-    @Column(name = "MembersLimit", nullable = true)
+    @Column(name = "MembersLimit")
     private Integer membersLimit;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public Integer getMembersLimit() {
+        return membersLimit;
+    }
+
+    public void setMembersLimit(Integer membersLimit) {
+        this.membersLimit = membersLimit;
+    }
 
     @Override
     public boolean equals(Object o) {

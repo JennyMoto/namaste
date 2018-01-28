@@ -12,10 +12,34 @@ public class Members {
 
     @OneToOne
     @JoinColumn(name = "ID")
-    Persons person;
+    private Persons person;
 
     @OneToMany(mappedBy = "members")
-    Set<ClassesReservations> classesReservations;
+    private Set<ClassesReservations> classesReservations;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Persons getPerson() {
+        return person;
+    }
+
+    public void setPerson(Persons person) {
+        this.person = person;
+    }
+
+    public Set<ClassesReservations> getClassesReservations() {
+        return classesReservations;
+    }
+
+    public void setClassesReservations(Set<ClassesReservations> classesReservations) {
+        this.classesReservations = classesReservations;
+    }
 
     @Override
     public boolean equals(Object o) {

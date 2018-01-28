@@ -9,18 +9,58 @@ public class Persons {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Name", nullable = true)
+    @Column(name = "Name", nullable = false)
     private String name;
 
-    @Column(name = "Surname", nullable = true)
+    @Column(name = "Surname", nullable = false)
     private String surname;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "Email")
     private String email;
 
-    @Column(name = "Mobile", nullable = true)
+    @Column(name = "Mobile", nullable = false)
     private String mobile;
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

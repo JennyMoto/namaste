@@ -11,15 +11,47 @@ public class Classes {
 
     @ManyToOne
     @JoinColumn(name = "ID")
-    ClassesType classesType;
+    private ClassesType classesType;
 
     @ManyToOne
     @JoinColumn(name = "ID")
-    ClassesRooms classesRoom;
+    private ClassesRooms classesRoom;
     
     @ManyToOne
     @JoinColumn(name = "ID")
-    Instructors instructor;
+    private Instructors instructor;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ClassesType getClassesType() {
+        return classesType;
+    }
+
+    public void setClassesType(ClassesType classesType) {
+        this.classesType = classesType;
+    }
+
+    public ClassesRooms getClassesRoom() {
+        return classesRoom;
+    }
+
+    public void setClassesRoom(ClassesRooms classesRoom) {
+        this.classesRoom = classesRoom;
+    }
+
+    public Instructors getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructors instructor) {
+        this.instructor = instructor;
+    }
 
     @Override
     public boolean equals(Object o) {

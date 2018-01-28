@@ -12,14 +12,46 @@ public class ClassesReservations {
 
     @OneToOne
     @JoinColumn(name = "ID")
-    Classes classes;
+    private Classes classes;
 
     @Column(name = "CancelDate")
-    Timestamp cancelTimestamp;
+    private Timestamp cancelTimestamp;
 
     @ManyToOne
     @JoinColumn(name = "ID")
     Members members;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
+    public Timestamp getCancelTimestamp() {
+        return cancelTimestamp;
+    }
+
+    public void setCancelTimestamp(Timestamp cancelTimestamp) {
+        this.cancelTimestamp = cancelTimestamp;
+    }
+
+    public Members getMembers() {
+        return members;
+    }
+
+    public void setMembers(Members members) {
+        this.members = members;
+    }
 
     @Override
     public boolean equals(Object o) {

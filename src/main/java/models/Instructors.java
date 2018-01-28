@@ -11,7 +11,23 @@ public class Instructors {
 
     @OneToOne
     @JoinColumn(name = "ID")
-    Persons person;
+    private Persons person;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Persons getPerson() {
+        return person;
+    }
+
+    public void setPerson(Persons person) {
+        this.person = person;
+    }
 
     @Override
     public boolean equals(Object o) {

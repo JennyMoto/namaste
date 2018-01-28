@@ -9,8 +9,24 @@ public class ClassesType {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Name", nullable = true, length = 20)
+    @Column(name = "Name")
     private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
