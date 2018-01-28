@@ -7,18 +7,18 @@ import java.sql.Timestamp;
 public class ClassesReservations {
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "Classes_ID")
     private Classes classes;
 
     @Column(name = "CancelDate")
     private Timestamp cancelTimestamp;
 
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "Members_ID")
     Members members;
 
     public int getId() {

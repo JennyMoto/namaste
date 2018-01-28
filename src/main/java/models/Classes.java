@@ -6,19 +6,19 @@ import javax.persistence.*;
 public class Classes {
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "ClassesType_ID")
     private ClassesType classesType;
 
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "ClassesRooms_ID")
     private ClassesRooms classesRoom;
     
     @ManyToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "Instructors_ID")
     private Instructors instructor;
 
     public int getId() {
