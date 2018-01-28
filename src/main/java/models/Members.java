@@ -7,7 +7,7 @@ import java.util.Set;
 public class Members {
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @OneToOne
