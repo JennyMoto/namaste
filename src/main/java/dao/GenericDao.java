@@ -11,11 +11,21 @@ public interface GenericDao<T> {
 
     List<T> findAll();
 
-    List<T> findByExample(T exampleInstance);
+    List<T> findByExample(T exampleInstance, String[] excludeProperty);
 
     List<T> findByCriteria(Criterion... criterion);
 
-    T makePersistent(T entity);
+    Long save(T entity);
 
-    void makeTransient(T entity);
+    void persist(T entity);
+
+    void merge(T entity);
+
+    void update(T entity);
+
+    void saveOrUpdate(T entity);
+
+    void delete(T entity);
+
+    
 }

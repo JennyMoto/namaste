@@ -50,13 +50,32 @@ public abstract class GenericHibernateDao<T> implements GenericDao<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public T makePersistent(T entity) {
+    public void saveOrUpdate(T entity) {
         getCurrentSession().saveOrUpdate(entity);
-        return entity;
     }
 
-    public void makeTransient(T entity) {
+    public void delete(T entity) {
         getCurrentSession().delete(entity);
+    }
+
+    @Override
+    public Long save(T entity) {
+        return (Long) getCurrentSession().save(entity);
+    }
+
+    @Override
+    public void persist(T entity) {
+        getCurrentSession().persist(entity);
+    }
+
+    @Override
+    public void merge(T entity) {
+        getCurrentSession().merge(entity);
+    }
+
+    @Override
+    public void update(T entity) {
+        getCurrentSession().update(entity);
     }
 
     public void flush() {
