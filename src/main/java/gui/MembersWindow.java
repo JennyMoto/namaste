@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Jenny on 27.01.2018.
  */
-public class MembersWindow extends JDialog implements ActionListener{
+public class MembersWindow extends JPanel implements ActionListener{
 
     JButton addMember = new JButton("Add Member");
     JButton remMember = new JButton("Remove Member");
@@ -19,8 +19,8 @@ public class MembersWindow extends JDialog implements ActionListener{
 
     public MembersWindow() {
 
-        this.setLocationRelativeTo(null);
-        this.setModal(true);
+//        this.setLocationRelativeTo(null);
+//        this.setModal(true);
         this.setSize(500, 500);
         this.setLayout(new GridLayout(0, 1));
 
@@ -62,7 +62,7 @@ public class MembersWindow extends JDialog implements ActionListener{
             System.out.println("Usuwa członka");
         }
         else if(source == back){
-            this.dispose();
+//            this.dispose();
         }
 
 

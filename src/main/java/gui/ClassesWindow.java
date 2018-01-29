@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Jenny on 27.01.2018.
  */
-public class ClassesWindow extends JDialog implements ActionListener {
+public class ClassesWindow extends JPanel implements ActionListener {
 
     JButton addClasses = new JButton("Add Classes");
     JButton remClasses = new JButton("Remove Classes");
@@ -17,8 +17,8 @@ public class ClassesWindow extends JDialog implements ActionListener {
 
 
     public ClassesWindow() {
-        this.setLocationRelativeTo(null);
-        this.setModal(true);
+//        this.setLocationRelativeTo(null);
+//        this.setModal(true);
 
         this.setSize(500, 500);
         this.setLayout(new GridLayout(0, 1));
@@ -57,7 +57,7 @@ public class ClassesWindow extends JDialog implements ActionListener {
             System.out.println("Usuwa zajecia");
         }
         else if(source == back){
-            this.dispose();
+//            this.dispose();
         }
 
 
