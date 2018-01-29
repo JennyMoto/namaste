@@ -1,8 +1,6 @@
 package dao;
 
-import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
-import util.HibernateUtil;
 
 import java.util.List;
 

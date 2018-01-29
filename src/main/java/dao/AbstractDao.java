@@ -2,6 +2,7 @@ package dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 import util.HibernateUtil;
@@ -9,20 +10,21 @@ import util.HibernateUtil;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class GenericHibernateDao<T> implements GenericDao<T> {
-    private Session currentSession = HibernateUtil.getSessionFactory().getCurrentSession();
+public abstract class AbstractDao<T> implements GenericDao<T> {
+    private Session currentSession;
     private Class<T> persistentClass;
 
-    public GenericHibernateDao() {
+    AbstractDao(Session session) {
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+        this.currentSession = session;
     }
 
-    private Class<T> getPersistentClass() {
+    protected Class<T> getPersistentClass() {
         return persistentClass;
     }
 
-    private Session getCurrentSession() {
+    protected Session getCurrentSession() {
         return currentSession;
     }
 
