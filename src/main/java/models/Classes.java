@@ -25,6 +25,7 @@ public class Classes {
     private Instructors instructor;
 
     @Column(name = "StartDate")
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar startDate;
 
     public Calendar getStartDate() {
