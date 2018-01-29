@@ -1,6 +1,9 @@
 package models;
 
+import org.hibernate.type.CalendarType;
+
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 public class Classes {
@@ -20,6 +23,17 @@ public class Classes {
     @ManyToOne
     @JoinColumn(name = "Instructors_ID")
     private Instructors instructor;
+
+    @Column(name = "StartDate")
+    private Calendar startDate;
+
+    public Calendar getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
 
     public int getId() {
         return id;

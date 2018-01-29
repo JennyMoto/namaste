@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.sql.Time;
 
 @Entity
 public class ClassesType {
@@ -11,6 +12,28 @@ public class ClassesType {
 
     @Column(name = "Name")
     private String name;
+
+    @Column(name = "Duration")
+    private Time duration;
+
+    @Column(name = "Color")
+    private Long color;
+
+    public Time getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Time duration) {
+        this.duration = duration;
+    }
+
+    public Long getColor() {
+        return color;
+    }
+
+    public void setColor(Long color) {
+        this.color = color;
+    }
 
     public int getId() {
         return id;
