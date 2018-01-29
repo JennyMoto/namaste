@@ -1,13 +1,11 @@
 package dao;
 
-import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
-import util.HibernateUtil;
 
 import java.util.List;
 
 public interface GenericDao<T> {
-    T findById(Long id);
+    T findById(Integer id);
 
     List<T> findAll();
 
