@@ -2,7 +2,6 @@ package dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Example;
 
@@ -45,6 +44,7 @@ public abstract class AbstractDao<T> implements GenericDao<T> {
         Example example =  Example.create(exampleInstance);
         for (String exclude : excludeProperty) {
             example.excludeProperty(exclude);
+            System.out.println(exclude);
         }
         crit.add(example);
         return crit.list();

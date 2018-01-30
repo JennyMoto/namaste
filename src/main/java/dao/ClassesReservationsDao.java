@@ -1,10 +1,10 @@
 package dao;
 
-import models.Members;
+import models.ClassesReservations;
 import org.hibernate.Session;
 
-public class MembersDao extends AbstractDao<Members> {
-    public MembersDao(Session session) {
+public class ClassesReservationsDao extends AbstractDao<ClassesReservations> {
+    public ClassesReservationsDao(Session session) {
         super(session);
     }
 

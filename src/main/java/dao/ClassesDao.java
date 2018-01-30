@@ -1,13 +1,11 @@
 package dao;
 
 import models.Classes;
-import models.Persons;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -31,5 +29,15 @@ public class ClassesDao extends AbstractDao<Classes> {
         System.out.println(endDate);
         criteria.add(Restrictions.between("startDate", startDate, endDate));
         return criteria.list();
+    }
+
+    public List<Classes> findSimilar (Classes classes) {
+//        String[] str = {}; //{"startDate"};
+//        return findByExample(classes, str);
+        Criteria crit = getCurrentSession().createCriteria(getPersistentClass());
+        crit.add(Restrictions.eq("classesType", classes.getClassesType()));
+        crit.add(Restrictions.eq("classesRoom", classes.getClassesRoom()));
+        crit.add(Restrictions.eq("instructor", classes.getInstructor()));
+        return crit.list();
     }
 }
