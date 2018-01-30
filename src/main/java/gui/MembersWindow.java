@@ -3,7 +3,10 @@ package gui;
 
 import dao.MembersDao;
 import gui.membersView.MembersViewTable;
+import models.Members;
+import models.Persons;
 import org.hibernate.Session;
+import util.HibernateUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,12 +18,10 @@ import java.awt.event.ActionListener;
  */
 public class MembersWindow extends JPanel implements ActionListener {
 
-    private MembersViewTable table;
-
-
     JButton addMember = new JButton("Add Member");
     JButton remMember = new JButton("Remove Member");
     JTextArea searchMember = new JTextArea("Wyszukaj...");
+    private MembersViewTable table;
 
     public MembersWindow() {
 
@@ -70,53 +71,51 @@ public class MembersWindow extends JPanel implements ActionListener {
             Members member = table.getModel().getList(table.getSelectedRow());
 
             Session ses = HibernateUtil.openSession();
-                org.hibernate.Transaction tx = ses.beginTransaction();
-                ses.delete(member);
-                tx.commit();
-                ses.close();
-
-
-        if (source == addMember) {
-            new DataSaver();
-        } else if (source == remMember) {
-            Members member = table.getModel().getList(table.getSelectedRow());
-
-            Session ses = HibernateUtil.openSession();
-                org.hibernate.Transaction tx = ses.beginTransaction();
-                ses.delete(member);
-                tx.commit();
-                ses.close();
-
-            } else if (source == cancel) {
-                clearInfo();
-
-
-            }
-        }
-
+            org.hibernate.Transaction tx = ses.beginTransaction();
+            ses.delete(member);
+            tx.commit();
+            ses.close();
         }
 
 
-    }
+//        if (source == addMember) {
+//            new DataSaver();
+//        } else if (source == remMember) {
+//            Members member = table.getModel().getList(table.getSelectedRow());
+//
+//            Session ses = HibernateUtil.openSession();
+//                org.hibernate.Transaction tx = ses.beginTransaction();
+//                ses.delete(member);
+//                tx.commit();
+//                ses.close();
+//
+//            } else if (source == cancel) {
+//                clearInfo();
+//
+//
+//            }
+        }
+
+        
 
 
-    private class DataSaver extends JPanel implements ActionListener {
-        private Persons person;
-        private Members member;
-        private JFrame frame;
 
+
+
+    class DataSaver extends JPanel implements ActionListener {
         JLabel name = new JLabel("Name:");
         JLabel surname = new JLabel("Surname:");
         JLabel email = new JLabel("E-mail:");
         JLabel mobile = new JLabel("Mobile:");
-
         JTextArea nameTxt = new JTextArea();
         JTextArea surnameTxt = new JTextArea();
         JTextArea emailTxt = new JTextArea();
         JTextArea mobileTxt = new JTextArea();
-
         JButton save = new JButton("Save");
         JButton cancel = new JButton("Cancel");
+        private Persons person;
+        private Members member;
+        private JFrame frame;
 
 
 
