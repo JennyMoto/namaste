@@ -12,8 +12,6 @@ public class ClassesWindow extends JPanel implements ActionListener {
 
     JButton addClasses = new JButton("Add Classes");
     JButton remClasses = new JButton("Remove Classes");
-    JButton back = new JButton("Back");
-
 
 
     public ClassesWindow() {
@@ -25,7 +23,6 @@ public class ClassesWindow extends JPanel implements ActionListener {
 
         addClasses.addActionListener(this);
         remClasses.addActionListener(this);
-        back.addActionListener(this);
 
         addClasses.setBackground(Color.lightGray);
         addClasses.setFont(new Font("Arial", Font.BOLD, 18));
@@ -35,13 +32,8 @@ public class ClassesWindow extends JPanel implements ActionListener {
         remClasses.setFont(new Font("Arial", Font.BOLD, 18));
         remClasses.setForeground(Color.darkGray);
 
-        back.setBackground(Color.lightGray);
-        back.setFont(new Font("Arial", Font.BOLD, 18));
-        back.setForeground(Color.darkGray);
-
         add(addClasses);
         add(remClasses);
-        add(back);
 
         this.setVisible(true);
 
@@ -56,9 +48,7 @@ public class ClassesWindow extends JPanel implements ActionListener {
         else if (source == remClasses){
             System.out.println("Usuwa zajecia");
         }
-        else if(source == back){
-//            this.dispose();
-        }
+
 
 
     }
