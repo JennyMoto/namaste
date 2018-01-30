@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import util.HibernateUtil;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -89,7 +90,7 @@ public class MembersWindow extends JPanel implements ActionListener {
 //                tx.commit();
 //                ses.close();
 //
-//            } else if (source == cancel) {
+//            } else if (source == clearData) {
 //                clearInfo();
 //
 //
@@ -103,46 +104,43 @@ public class MembersWindow extends JPanel implements ActionListener {
 
 
     class DataSaver extends JPanel implements ActionListener {
-        JLabel name = new JLabel("Name:");
-        JLabel surname = new JLabel("Surname:");
-        JLabel email = new JLabel("E-mail:");
-        JLabel mobile = new JLabel("Mobile:");
-        JTextArea nameTxt = new JTextArea();
-        JTextArea surnameTxt = new JTextArea();
-        JTextArea emailTxt = new JTextArea();
-        JTextArea mobileTxt = new JTextArea();
-        JButton save = new JButton("Save");
-        JButton cancel = new JButton("Cancel");
-        private Persons person;
-        private Members member;
-        private JFrame frame;
+
+        private JLabel name = new JLabel("Name: ");
+        private JLabel surname = new JLabel("Surname: ");
+        private JLabel email = new JLabel("E-mail: ");
+        private JLabel mobile = new JLabel("Mobile: ");
+
+        private JTextArea nameTxt = new JTextArea();
+        private JTextArea surnameTxt = new JTextArea();
+        private JTextArea emailTxt = new JTextArea();
+        private JTextArea mobileTxt = new JTextArea();
 
 
+        private JButton save = new JButton("Save");
+        private JButton clearData = new JButton("Clear");
+
+        private JFrame frameDataSever;
 
 
         public DataSaver() {
-
             setLayout(new GridLayout(5, 2));
-
-            add(name);
-            add(nameTxt);
-            add(surname);
-            add(surnameTxt);
-            add(email);
-            add(emailTxt);
-            add(mobile);
-            add(mobileTxt);
+            JComponent[] tableOfComp = {name,nameTxt,surname,surnameTxt,email,emailTxt,mobile,mobileTxt};
+            for(JComponent c: tableOfComp){
+                c.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+                add(c);
+            }
 
             add(save);
+            clearData.setToolTipText("Clear all cells");
             save.addActionListener(this);
-            add(cancel);
-            cancel.addActionListener(this);
+            add(clearData);
+            clearData.addActionListener(this);
 
-            frame = new JFrame("Set data");
-            frame.add(this);
-            frame.setSize(500, 500);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setVisible(true);
+            frameDataSever = new JFrame("Set data");
+            frameDataSever.add(this);
+            frameDataSever.setSize(500, 500);
+            frameDataSever.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frameDataSever.setVisible(true);
 
         }
 
@@ -152,13 +150,13 @@ public class MembersWindow extends JPanel implements ActionListener {
 
             if (source == save) {
 
-                person = new Persons();
+                Persons person = new Persons();
                 person.setName(nameTxt.getText());
                 person.setSurname(surnameTxt.getText());
                 person.setEmail(emailTxt.getText());
                 person.setMobile(mobileTxt.getText());
 
-                member = new Members();
+                Members member = new Members();
                 member.setPerson(person);
 
                 /*Session ses = HibernateUtil.openSession();
@@ -168,16 +166,16 @@ public class MembersWindow extends JPanel implements ActionListener {
                 ses.persist(member);
                 tx.commit();
                 ses.close();*/
-                clearInfo();
 
-                int i =  JOptionPane.showConfirmDialog(null, "Do You want add next Member?",
+                int i =  JOptionPane.showConfirmDialog(frameDataSever, "Do You want add next Member?",
                         null, JOptionPane.YES_NO_OPTION);
 
                 if(i==1){
-                    frame.dispose();
+                    frameDataSever.dispose();
                 }
+                else clearInfo();
 
-            } else if (source == cancel) {
+            } else if (source == clearData) {
                 clearInfo();
 
 

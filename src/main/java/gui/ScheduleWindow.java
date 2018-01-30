@@ -1,5 +1,7 @@
 package gui;
 
+import gui.shedule.ScheduleViewTable;
+
 import javax.swing.*;
 
 /**
@@ -8,9 +10,7 @@ import javax.swing.*;
 public class ScheduleWindow extends JPanel {
 
     public ScheduleWindow(){
-
-           JOptionPane.showMessageDialog(null, "Tu będzie grafik.");
-
-
+           JScrollPane sp = new JScrollPane(new ScheduleViewTable());
+           add(sp);
     }
 }
