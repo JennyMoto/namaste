@@ -1,7 +1,7 @@
 package models;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 @Entity
 public class ClassesReservations {
@@ -15,8 +15,8 @@ public class ClassesReservations {
     private Classes classes;
 
     @Column(name = "CancelDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar cancelDate;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp cancelDate;
 
     @ManyToOne
     @JoinColumn(name = "Members_ID")
@@ -38,11 +38,11 @@ public class ClassesReservations {
         this.classes = classes;
     }
 
-    public Calendar getCancelDate() {
+    public Timestamp getCancelDate() {
         return cancelDate;
     }
 
-    public void setCancelDate(Calendar cancelDate) {
+    public void setCancelDate(Timestamp cancelDate) {
         this.cancelDate = cancelDate;
     }
 

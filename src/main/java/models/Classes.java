@@ -1,9 +1,7 @@
 package models;
 
-import org.hibernate.type.CalendarType;
-
 import javax.persistence.*;
-import java.util.Calendar;
+import java.sql.Timestamp;
 
 @Entity
 public class Classes {
@@ -25,14 +23,14 @@ public class Classes {
     private Instructors instructor;
 
     @Column(name = "StartDate")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar startDate;
+//    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp startDate;
 
-    public Calendar getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 

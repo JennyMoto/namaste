@@ -1,12 +1,7 @@
 package dao;
 
 import models.Instructors;
-import models.Persons;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-
-import java.util.List;
 
 public class InstructorsDao extends AbstractDao<Instructors> {
     public InstructorsDao(Session session) {
