@@ -11,8 +11,8 @@ public class MembersViewTable extends JTable {
 
     private MembersViewModel mvm;
 
-    public MembersViewTable(List<Members> list) {
-        mvm = new MembersViewModel(list);
+    public MembersViewTable() {
+        mvm = new MembersViewModel();
        setModel(mvm);
        setAutoCreateRowSorter(true);
     }

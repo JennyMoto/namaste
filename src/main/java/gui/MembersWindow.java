@@ -26,11 +26,8 @@ public class MembersWindow extends JPanel implements ActionListener {
 
     public MembersWindow() {
 
-        Session memberSess = HibernateUtil.openSession();
-        MembersDao memberD = new MembersDao(memberSess);
-        table = new MembersViewTable(memberD.findAll());
+        table = new MembersViewTable();
         JScrollPane sp = new JScrollPane(table);
-        memberSess.close();
 
 //        this.setLocationRelativeTo(null);
 //        this.setModal(true);
@@ -69,13 +66,7 @@ public class MembersWindow extends JPanel implements ActionListener {
         if (source == addMember) {
             new DataSaver();
         } else if (source == remMember) {
-            Members member = table.getModel().getList(table.getSelectedRow());
-
-            Session ses = HibernateUtil.openSession();
-            org.hibernate.Transaction tx = ses.beginTransaction();
-            ses.delete(member);
-            tx.commit();
-            ses.close();
+            table.getModel().removeMember(table.getSelectedRow());
         }
 
 
@@ -97,18 +88,16 @@ public class MembersWindow extends JPanel implements ActionListener {
 //            }
         }
 
-        
-
 
 
 
 
     class DataSaver extends JPanel implements ActionListener {
 
-        private JLabel name = new JLabel("Name: ");
-        private JLabel surname = new JLabel("Surname: ");
-        private JLabel email = new JLabel("E-mail: ");
-        private JLabel mobile = new JLabel("Mobile: ");
+        private JLabel name = new JLabel("Name: ",null,SwingConstants.RIGHT);
+        private JLabel surname = new JLabel("Surname: ",null,SwingConstants.RIGHT);
+        private JLabel email = new JLabel("E-mail: ",null,SwingConstants.RIGHT);
+        private JLabel mobile = new JLabel("Mobile: ",null,SwingConstants.RIGHT);
 
         private JTextArea nameTxt = new JTextArea();
         private JTextArea surnameTxt = new JTextArea();
@@ -159,13 +148,7 @@ public class MembersWindow extends JPanel implements ActionListener {
                 Members member = new Members();
                 member.setPerson(person);
 
-                /*Session ses = HibernateUtil.openSession();
-                org.hibernate.Transaction tx = ses.beginTransaction();
-
-                ses.persist(person);
-                ses.persist(member);
-                tx.commit();
-                ses.close();*/
+                table.getModel().addMember(member);
 
                 int i =  JOptionPane.showConfirmDialog(frameDataSever, "Do You want add next Member?",
                         null, JOptionPane.YES_NO_OPTION);
