@@ -1,12 +1,10 @@
 package gui.shedule;
 
-import org.hibernate.boot.jaxb.SourceType;
+import models.Classes;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public class MyRenderer extends DefaultTableCellRenderer {
@@ -20,10 +18,28 @@ public class MyRenderer extends DefaultTableCellRenderer {
 
         ScheduleViewModel model = (ScheduleViewModel) table.getModel();
 
-        if (row == table.getSelectedRow() && column == table.getSelectedColumn()&& column!=0) {
-            c.setBackground(Color.green.darker());
-        } else if (!isSelected) {
-            c.setBackground(backgroundColor);
+//        if (row == table.getSelectedRow() && column == table.getSelectedColumn()&& column!=0) {
+//            c.setBackground(Color.green.darker());
+//        } else if (!isSelected) {
+//            c.setBackground(backgroundColor);
+//        }
+        Classes realValue = (Classes) model.getRealValueAt(row, column);
+        Color color = null;
+        if (realValue != null) {
+            color = new Color(realValue.getClassesType().getColor());
+        }
+        if (row == table.getSelectedRow() && column == table.getSelectedColumn() && column != 0) {
+            if (color != null) {
+                c.setBackground(color.darker());
+            } else {
+                c.setBackground(table.getSelectionBackground());
+            }
+        } else {
+            if (color != null) {
+                c.setBackground(color);
+            } else {
+                c.setBackground(table.getBackground());
+            }
         }
 
         if (row % 4 == 0){
@@ -38,7 +54,6 @@ public class MyRenderer extends DefaultTableCellRenderer {
 
         setHorizontalAlignment(CENTER);
         setVerticalAlignment(CENTER);
-
 
         return c;
     }
