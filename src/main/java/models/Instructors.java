@@ -9,7 +9,7 @@ public class Instructors {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "Persons_ID")
     private Persons person;
 

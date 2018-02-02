@@ -13,24 +13,24 @@ public class ClassesType {
     private String name;
 
     @Column(name = "Duration")
-    private Long duration;
+    private Integer duration;
 
     @Column(name = "Color")
-    private Long color;
+    private Integer color;
 
-    public Long getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Long duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
-    public Long getColor() {
+    public Integer getColor() {
         return color;
     }
 
-    public void setColor(Long color) {
+    public void setColor(Integer color) {
         this.color = color;
     }
 
