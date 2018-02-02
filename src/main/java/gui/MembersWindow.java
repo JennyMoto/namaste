@@ -1,15 +1,12 @@
 package gui;
 
 
-import dao.MembersDao;
 import gui.membersView.MembersViewTable;
 import models.Members;
 import models.Persons;
-import org.hibernate.Session;
-import util.HibernateUtil;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,9 +16,10 @@ import java.awt.event.ActionListener;
  */
 public class MembersWindow extends JPanel implements ActionListener {
 
-    JButton addMember = new JButton("Add Member");
-    JButton remMember = new JButton("Remove Member");
-    JTextArea searchMember = new JTextArea("Wyszukaj...");
+    private JButton addMember = new JButton("Add Member");
+    private JButton remMember = new JButton("Remove Member");
+    private JButton find = new JButton("Find");
+    private JButton showAll = new JButton("Show All");
     private MembersViewTable table;
 
     public MembersWindow() {
@@ -31,11 +29,21 @@ public class MembersWindow extends JPanel implements ActionListener {
 
 //        this.setLocationRelativeTo(null);
 //        this.setModal(true);
-        this.setSize(500, 500);
-        this.setLayout(new GridLayout(0, 1));
+        this.setPreferredSize(new Dimension(500, 500));
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         addMember.addActionListener(this);
         remMember.addActionListener(this);
+        find.addActionListener(this);
+        showAll.addActionListener(this);
+
+        showAll.setBackground(Color.lightGray);
+        showAll.setFont(new Font("Arial", Font.BOLD, 18));
+        showAll.setForeground(Color.darkGray);
+
+        find.setBackground(Color.lightGray);
+        find.setFont(new Font("Arial", Font.BOLD, 18));
+        find.setForeground(Color.darkGray);
 
         addMember.setBackground(Color.lightGray);
         addMember.setFont(new Font("Arial", Font.BOLD, 18));
@@ -45,16 +53,16 @@ public class MembersWindow extends JPanel implements ActionListener {
         remMember.setFont(new Font("Arial", Font.BOLD, 18));
         remMember.setForeground(Color.darkGray);
 
-        searchMember.setFont(new Font("Arial", Font.BOLD, 18));
-        searchMember.setForeground(Color.darkGray);
-
         JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2,2));
         panel.add(addMember);
         panel.add(remMember);
-        panel.setPreferredSize(new Dimension(500, 50));
+        panel.add(find);
+        panel.add(showAll);
+
         add(sp);
         add(panel);
-        add(searchMember);
+
 
         this.setVisible(true);
 
@@ -68,36 +76,27 @@ public class MembersWindow extends JPanel implements ActionListener {
         } else if (source == remMember) {
             table.getModel().removeMember(table.getSelectedRow());
         }
+        else if (source == find){
+            String regex = JOptionPane.showInputDialog("Regex:");
 
+            if (regex != null) {
+                TableRowSorter sorter = new TableRowSorter<>(table.getModel());
+                sorter.setRowFilter(RowFilter.regexFilter(regex));
+                table.setRowSorter(sorter);
 
-//        if (source == addMember) {
-//            new DataSaver();
-//        } else if (source == remMember) {
-//            Members member = table.getModel().getList(table.getSelectedRow());
-//
-//            Session ses = HibernateUtil.openSession();
-//                org.hibernate.Transaction tx = ses.beginTransaction();
-//                ses.delete(member);
-//                tx.commit();
-//                ses.close();
-//
-//            } else if (source == clearData) {
-//                clearInfo();
-//
-//
-//            }
+            }
+
         }
-
-
-
+        else table.setRowSorter(null);
+    }
 
 
     class DataSaver extends JPanel implements ActionListener {
 
-        private JLabel name = new JLabel("Name: ",null,SwingConstants.RIGHT);
-        private JLabel surname = new JLabel("Surname: ",null,SwingConstants.RIGHT);
-        private JLabel email = new JLabel("E-mail: ",null,SwingConstants.RIGHT);
-        private JLabel mobile = new JLabel("Mobile: ",null,SwingConstants.RIGHT);
+        private JLabel name = new JLabel("Name: ", null, SwingConstants.RIGHT);
+        private JLabel surname = new JLabel("Surname: ", null, SwingConstants.RIGHT);
+        private JLabel email = new JLabel("E-mail: ", null, SwingConstants.RIGHT);
+        private JLabel mobile = new JLabel("Mobile: ", null, SwingConstants.RIGHT);
 
         private JTextArea nameTxt = new JTextArea();
         private JTextArea surnameTxt = new JTextArea();
@@ -108,13 +107,16 @@ public class MembersWindow extends JPanel implements ActionListener {
         private JButton save = new JButton("Save");
         private JButton clearData = new JButton("Clear");
 
+
         private JFrame frameDataSever;
 
 
         public DataSaver() {
+
+
             setLayout(new GridLayout(5, 2));
-            JComponent[] tableOfComp = {name,nameTxt,surname,surnameTxt,email,emailTxt,mobile,mobileTxt};
-            for(JComponent c: tableOfComp){
+            JComponent[] tableOfComp = {name, nameTxt, surname, surnameTxt, email, emailTxt, mobile, mobileTxt};
+            for (JComponent c : tableOfComp) {
                 c.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
                 add(c);
             }
@@ -150,22 +152,19 @@ public class MembersWindow extends JPanel implements ActionListener {
 
                 table.getModel().addMember(member);
 
-                int i =  JOptionPane.showConfirmDialog(frameDataSever, "Do You want add next Member?",
+                int i = JOptionPane.showConfirmDialog(frameDataSever, "Do You want add next Member?",
                         null, JOptionPane.YES_NO_OPTION);
 
-                if(i==1){
+                if (i == 1) {
                     frameDataSever.dispose();
-                }
-                else clearInfo();
+                } else clearInfo();
 
             } else if (source == clearData) {
                 clearInfo();
-
-
             }
         }
 
-        private void clearInfo(){
+        private void clearInfo() {
             nameTxt.setText("");
             surnameTxt.setText("");
             emailTxt.setText("");

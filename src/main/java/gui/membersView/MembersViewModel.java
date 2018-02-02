@@ -1,52 +1,33 @@
 package gui.membersView;
 
 import dao.MembersDao;
-import dao.PersonsDao;
 import models.Members;
-import models.Persons;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class MembersViewModel extends AbstractTableModel{
 
     static String[] columnsNames = {"Name", "Surname", "e-mail", "mobile"};
-    private Object[][] data;
     private List<Members> list;
 
     public MembersViewModel() {
+
         loadMembersFromDB();
     }
-
-    /*@Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
-    }*/
 
     private void loadMembersFromDB() {
         Session memberSess = HibernateUtil.openSession();
         MembersDao memberD = new MembersDao(memberSess);
 
         this.list = memberD.findAll();
-        prepareDataForView();
 
         memberSess.close();
         fireTableDataChanged();
     }
 
-    private void prepareDataForView() {
-        this.data = new Object[list.size()][columnsNames.length];
-
-        for(int i = 0; i<list.size(); i++){
-            data[i][0] = list.get(i).getPerson().getName();
-            data[i][1] = list.get(i).getPerson().getSurname();
-            data[i][2] = list.get(i).getPerson().getEmail();
-            data[i][3] = list.get(i).getPerson().getMobile();
-        }
-    }
 
     public Members addMember(Members member) {
         try {
@@ -73,10 +54,6 @@ public class MembersViewModel extends AbstractTableModel{
         loadMembersFromDB();
     }
 
-    public Members getList(int i){
-        return list.get(i);
-    }
-
     @Override
     public String getColumnName(int i){
       return columnsNames[i];
@@ -87,7 +64,6 @@ public class MembersViewModel extends AbstractTableModel{
         return list.size();
     }
 
-
     @Override
     public int getColumnCount() {
         return columnsNames.length;
@@ -95,11 +71,38 @@ public class MembersViewModel extends AbstractTableModel{
 
   @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data[rowIndex][columnIndex];
+      Members member = list.get(rowIndex);
+      switch (columnIndex){
+          case 0: return member.getPerson().getName();
+          case 1: return member.getPerson().getSurname();
+          case 2: return member.getPerson().getEmail();
+          case 3: return member.getPerson().getMobile();
+      }
+        return null;
+    }
+
+
+    @Override
+   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Members member = list.get(rowIndex);
+        switch (columnIndex){
+            case 0: member.getPerson().setName((String) aValue); break;
+            case 1: member.getPerson().setSurname((String)aValue); break;
+            case 2: member.getPerson().setEmail((String)aValue); break;
+            case 3: member.getPerson().setMobile((String)aValue); break;
+        }
+        Session ses = HibernateUtil.openSession();
+        org.hibernate.Transaction tx = ses.beginTransaction();
+
+        ses.update(member.getPerson());
+        tx.commit();
+        ses.close();
+        loadMembersFromDB();
     }
 
     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        data[rowIndex][columnIndex]=aValue;
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
     }
+
 }
